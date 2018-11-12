@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'mainsite/css/main.css' %}">
+    <!-- Font Aswesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Immobilier Panm</title>
+
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper blue lighten-1 white-text">
+        <a href="{% url 'mainsite-index' %}" class="brand-logo">
+          <img width="65" height="60" src="{% static 'mainsite/images/immopanm1.png' %}" alt="house logo">
+        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'mainsite-index' %}">Buy</a></li>
+          <li><a href="{% url 'mainsite-index' %}">Sell</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="{% url 'mainsite-index' %}">Buy</a></li>
+      <li><a href="#contact">Sell</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red"><i class="material-icons">list</i></a>
+      <ul>
+        <li>
+          <a class="btn-floating green" href="#"><i class="material-icons">mail</i></a>
+        </li>
+        <li>
+          <a class="btn-floating blue" href="#"><i class="material-icons">phone_in_talk</i></a>
+        </li>
+        <li>
+          <a class="btn-floating purple" href="{% url 'mainsite-index' %}"><i class="material-icons">home</i></a>
+      </ul>
+    </div>
+
+      <h2 class="center">{{ post.location }}</h2>
+      <div class="row" style="margin-top: 100px;">
+        <div class="col s12 l6">
+          <img width="350" height="250" class="mt-4 mb-4 border"
+          src="{{ post.image }}"
+          alt="hello world text">
+          <h3 class="">{{ post.location }}</h3>
+          <p>{{ post.description|safe }}</p>
+          <div class="">
+            <small class="">{{ post.date_posted }}</small>
+          </div>
+        </div>
+        <div class="col s12 l6" style="margin-top: -50px;">
+          <h4 class="right">Price: {{ post.price }}</h4>
+          {% if post.more_photos %}
+          <div class="carousel carousel-slider center">
+            <div class="carousel-fixed-item right hide-on-medium">
+              <a class="btn waves-effect white grey-text darken-text-2">End</a>
+            </div>
+            {% for img in more_imgs %}
+            <div class="carousel-item blue white-text" href="#{{ forloop.counter }}!">
+              <h2>{{ forloop.counter }}</h2>
+              {% if forloop.counter == 1 %}
+                <img width="250" height="250" src="{{ img }}" alt="post.alt">
+              {% else %}
+                <img width="250" height="250" src="{{ img|slice:"1:" }}" alt="post.alt">
+              {% endif %}
+            </div>
+            {% endfor %}
+          {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-left: 20px;">
+        <h4>Contact</h4>
+        <ul>
+          <li>Phone</li>
+          <li>Email</li>
+          <li>Whatsapp</li>
+        </ul>
+      </div>
+
+
+    <footer class="page-footer teal">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">Helping you find
+            your dream home, at the right price.</p>
+
+
+          </div>
+          <div class="col l6 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+              <li><a class="white-text connectIcons" href="#!"><i class="fab fa-whatsapp fa-2x"></i></a>
+                <a class="white-text connectIcons" href="#!"><i class="fab fa-facebook-square fa-2x"></i></a>
+                <a class="white-text" href="#!"><i class="fas fa-envelope fa-2x"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          &copy; Immobilier Panm 2018
+        </div>
+      </div>
+    </footer>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+       M.AutoInit();
+    </script>
+  </body>
+</html>
